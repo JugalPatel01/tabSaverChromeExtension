@@ -1,0 +1,55 @@
+*{
+    margin:1vw;
+}
+body{
+    background-color: aliceblue;
+    min-width: 380px;
+    min-height: 500px;
+    max-width: 380px;
+    max-height: 100%;
+}
+button{
+    background-color: royalblue;
+    color:white;
+    border-style: none;
+    border-radius: 1vh;
+    padding:1vh;
+    
+}
+button:active{
+    background-color: black;
+}
+input{
+    border-radius: 0.4vh;
+    border-style: dashed;
+    padding : 0.8vh 1vh;
+    width: 80%;
+}
+p{
+    border-style:solid;
+    width: fit-content;
+    padding: 1vh 2vh 1vh 1vh;
+    font-size: 2vh;
+}
+ul{
+    border-style: solid;
+    border-left:none;
+    border-right:none;
+    border-color: royalblue;
+    width:auto;
+    padding:3vh 2vh 2vh 3vh;
+    font-size:2vh;
+}
+li{
+    list-style-type: decimal;
+}
+li a{
+    text-decoration: none;
+    
+}
+#deletebutton{
+    background-color: #d60000;
+}
+#deletebutton:active{
+    background-color: black;
+}
