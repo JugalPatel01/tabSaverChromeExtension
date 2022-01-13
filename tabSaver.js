@@ -22,25 +22,51 @@ if (outputFromLocalStrorage) {
 // functions
 
 function save() {
-    savedinput.push(input.value)
-    savedinput = JSON.stringify(savedinput)
-    localStorage.setItem("savedinput", savedinput)
-    savedinput = JSON.parse(savedinput)
-    input.value = ""
-    showOutput(savedinput)
+    if (input.value != "") {
+        savedinput.push(input.value)
+        savedinput = JSON.stringify(savedinput)
+        localStorage.setItem("savedinput", savedinput)
+        savedinput = JSON.parse(savedinput)
+        input.value = ""
+        showOutput(savedinput)
+    }
 }
 
 function showOutput(output) {
     let showSaved = ""
     for (let i = 0; i < output.length; i++) {
         showSaved += `
-        <li>
-        <a target="_blank" href="${output[i]}">${output[i]} </a>
-        </li> `
+        <div>
+            <li>
+            <a target="_blank" href="${output[i]}">${output[i]}</a>
+            <button class="deletebutton" onclick="deleteitem(this)"> Delete </button>
+            </li>
+        </div>
+        `
     }
     showResult.innerHTML = showSaved
 }
 
+function deleteitem(sender) {
+    let s = sender.parentNode.childNodes;
+    let li = s[1].innerHTML;
+    let aElements = sender.parentNode.parentNode.parentNode.getElementsByTagName("a");
+    let aElementsLength = aElements.length;
+    let index;
+    for (var i = 0; i < aElementsLength; i++) {
+        if (aElements[i].innerHTML == li) //this condition is never true
+        {
+            index = i;
+        }
+    }
+
+    savedinput = savedinput.filter(value => value != savedinput[index])
+    savedinput = JSON.stringify(savedinput)
+    localStorage.setItem("savedinput", savedinput)
+    savedinput = JSON.parse(savedinput)
+    showOutput(savedinput)
+
+}
 function deleteLocalStorage() {
     confirmation = confirm("are you sure to delete all??")
 
@@ -51,8 +77,8 @@ function deleteLocalStorage() {
     }
 }
 
-function saveTab() {
-    chrome.tabs.query({ active: true, currentWindow: true },function(tabs){
+async function saveTab() {
+    chrome.tabs.query({ active: true, currentWindow:true},function(tabs){
         savedinput.push(tabs[0].url)
         savedinput = JSON.stringify(savedinput)
         localStorage.setItem("savedinput", savedinput)

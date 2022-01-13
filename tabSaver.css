@@ -53,3 +53,9 @@ li a{
 #deletebutton:active{
     background-color: black;
 }
+.deletebutton{
+    background-color: #d60000;
+}
+.deletebutton:active{
+    background-color: black;
+}
